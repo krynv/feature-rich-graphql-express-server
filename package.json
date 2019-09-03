@@ -1,0 +1,31 @@
+{
+  "name": "feature-rich-graphql-express-server",
+  "version": "1.0.0",
+  "description": "A feature rich GraphQL Express Server",
+  "main": "server.js",
+  "dependencies": {
+    "apollo-server": "^2.9.3",
+    "apollo-server-express": "^2.9.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^14.5.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:krynv/legacy-flix-chat.git"
+  },
+  "keywords": [
+    "graphql",
+    "express"
+  ],
+  "author": "Vitaliy Krynytskyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krynv/feature-rich-graphql-express-server/issues"
+  },
+  "homepage": "https://github.com/krynv/feature-rich-graphql-express-server#readme"
+}

@@ -14,6 +14,15 @@ app.use(cors()); // enable cors
 const server = new ApolloServer({
     typeDefs: schema,
     resolvers,
+    formatError: error => {
+        const message = error.message
+            .replace('SequelizeValidationError: ', '')  // remove the internal sequelize message
+            .replace('Validation error: ', '');         // leave the validation error we specified
+        return {
+            ...error,
+            message,
+        };
+    },
     context: async () => ({
         models,
         me: await models.User.findByLogin('cnorris'),

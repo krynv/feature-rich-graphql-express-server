@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:krynv/legacy-flix-chat.git"
+    "url": "git@github.com:krynv/feature-rich-graphql-express-server.git"
   },
   "keywords": [
     "graphql",

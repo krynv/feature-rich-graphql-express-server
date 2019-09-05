@@ -22,6 +22,8 @@ DATABASE=postgres
 DATABASE_USER=postgres
 DATABASE_PASSWORD=postgres
 HOST=localhost
+
+SECRET=myverysecuresecretphrase
 ```
 
 and must be placed in the root of this repository.

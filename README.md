@@ -9,6 +9,7 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * Resolvers powered by PostgreSQL
 * Custom validation and error handling
 * User authentication
+* Schema documentation via GraphiQL
 
 ## Prerequisites
 

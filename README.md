@@ -32,7 +32,7 @@ and must be placed in the root of this repository.
 * src/
 * node_modules/
 .babelrc
------------.env -----------
+-----------  .env  -----------
 .gitattributes
 .gitignore
 README.md

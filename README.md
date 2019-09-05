@@ -4,11 +4,11 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 
 ## Features
 * Express powered Apollo Server
-* Sequelize and PostgreSQL connectivity
+* PostgreSQL connectivity via Sequelize
 * Multiple Queries and Mutations
-* Resolvers powered by PostgreSQL
+* PostgreSQL linked resolvers
 * Custom validation and error handling
-* User authentication
+* User registration and token based authentication
 * Schema documentation via GraphiQL
 
 ## Prerequisites
@@ -36,6 +36,123 @@ and must be placed in the root of this repository.
 README.md
 package-lock.json
 package.json
+```
+
+## Queries and Mutations
+
+> **NOTE**: A `secret` is passed to all resolver functions. Some of these queries and/ or mutations require a `secret` to be defined. It can be added as a `SECRET` parameter in your `.env` file - to be used as an environment variable via the `dotenv` dependency. 
+
+### Users
+
+#### List all users
+```graphql
+{
+    users {
+        id
+        username
+        email
+        messages {
+            id
+            text
+        }
+    }
+}
+```
+
+#### List a specific user by user ID
+```graphql
+{
+    user(id: 4) {
+        id
+        username
+        email
+    }
+}
+```
+
+#### Sign Up 
+```graphql
+mutation {
+	signUp(username: "TestUser", email: "user@email.com", password: "password123") {
+        token
+    }
+}
+```
+
+#### Sign In 
+```graphql
+mutation {
+    signIn(login: "TestUser", password: "password123") {
+        token
+    }
+}
+```
+
+#### Show the 'me' user
+```graphql
+{
+    me {
+        id
+        username
+        email
+        messages {
+            id
+            text
+        }
+    }
+}
+```
+
+### Messages
+
+#### List all messages
+```graphql
+{
+    messages {
+        id
+        text
+        user {
+            id
+            username
+            email
+        }
+    }
+}
+```
+
+#### List a specific message by message ID
+```graphql
+{
+    message(id: "2") {
+        id
+        text
+        user {
+            id
+            username
+            email
+        }
+    }
+}
+```
+
+#### Create a new message
+
+> **NOTE**: At the moment, this mutation requires a 'me' `User` object to exit in `src/index.js` - as a `User` must exist for a `Message` object to be created.
+
+```graphql
+mutation {
+    createMessage(text: "Cake") {
+        id
+        text
+    }
+}
+```
+#### Delete a specific message by message ID
+
+```graphql
+mutation {
+    deleteMessage(id: "4")
+}
 ```
 
 ## Run the application

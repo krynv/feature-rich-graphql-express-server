@@ -8,9 +8,24 @@ export default gql`
     me: User
   }
 
+  type Token {
+    token: String!
+  }
+
+  extend type Mutation {
+    signUp(
+      username: String!
+      email: String!
+      password: String!
+    ): Token!
+
+    signIn(login: String!, password: String!): Token!
+  }
+
   type User {
     id: ID!
     username: String!
+    email: String!
     messages: [Message!]
   }
   

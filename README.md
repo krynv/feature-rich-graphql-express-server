@@ -28,7 +28,6 @@ README.md
 package-lock.json
 package.json
 
-
 ## Run the application
 
 Install dependencies:
@@ -36,6 +35,8 @@ Install dependencies:
     npm i
 
 Start server: 
+
+> **NOTE**: Make sure PostgreSQL is running before you start the application.
 
     npm start
 

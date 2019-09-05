@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import 'dotenv/config'; // so we can use environment variables from our .env file
 
 const sequelize = new Sequelize(
     process.env.DATABASE,
@@ -6,7 +7,8 @@ const sequelize = new Sequelize(
     process.env.DATABASE_PASSWORD,
     {
         dialect: 'postgres',
-    },
+        host: process.env.HOST,
+    }
 );
 
 const models = {
@@ -22,5 +24,5 @@ Object.keys(models).forEach(key => {
 });
 
 export { sequelize };
-    
+
 export default models;

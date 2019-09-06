@@ -5,12 +5,13 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 ## Features
 * Express powered Apollo Server
 * PostgreSQL connectivity via Sequelize
-* Multiple Queries and Mutations
+* Multiple queries and mutations
 * PostgreSQL linked resolvers
 * Custom validation and error handling
 * User registration and token based authentication
 * User authorisation via resolver middleware
 * Custom scalars
+* Cursor-based pagination
 * Schema documentation via GraphiQL
 
 ## Prerequisites
@@ -44,7 +45,7 @@ package.json
 
 ## Available Schemas
 
-> **NOTE**: A `secret` is passed to all resolver functions. Some of these queries and/ or mutations require a `secret` to be defined. It can be added as a `SECRET` parameter in your `.env` file - to be used as an environment variable via the `dotenv` dependency. 
+> **NOTE**: A `secret` is passed to all resolver functions. Some of these queries and/ or mutations require a `secret` to be defined. It can be added as a `SECRET` parameter in your `.env` file - to be used as an environment variable via the `dotenv` dependency. See the [Prerequisites](#Prerequisites) section for more info.
 
 
 ### Users
@@ -124,16 +125,32 @@ mutation {
 ### Messages
 
 #### List all messages
+
+> **NOTE**: This particular example uses cursor based pagination on the `createdAt` field. It will retrieve the earliest created messages. 
+
 ```graphql
 {
-    messages {
-        id
-        text
-        createdAt
-        user {
+    messages(limit: 2) {
+        edges {
             id
-            username
-            email
+            text
+            createdAt
+        }
+        pageInfo {
+            hasNextPage
+            endCursor
+        } 
+    }
+  
+    messages(limit: 1, cursor: "RnJpIFNlcCAwNiAyMDE5IDEyOjM0OjE5IEdNVCswMTAwIChCcml0aXNoIFN1bW1lciBUaW1lKQ==") {
+        edges {
+            id
+            text
+            createdAt
+        }
+        pageInfo {
+            hasNextPage
+            endCursor
         }
     }
 }

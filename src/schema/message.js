@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
 
   extend type Query {
-    messages: [Message!]!
+    messages(cursor: String, limit: Int): MessageConnection!
     message(id: ID!): Message!
   }
 
@@ -17,6 +17,16 @@ export default gql`
     text: String!
     createdAt: Date!
     user: User!
+  }
+  
+  type MessageConnection {
+    edges: [Message!]!
+    pageInfo: PageInfo!
+  }
+
+  type PageInfo {
+    hasNextPage: Boolean!
+    endCursor: String!
   }
   
 `;

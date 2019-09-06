@@ -14,6 +14,7 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * Cursor-based pagination
 * Subscriptions for real-time communication
 * Schema documentation via GraphiQL
+* E2E testing
 
 ## Prerequisites
 

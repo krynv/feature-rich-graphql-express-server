@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import 'dotenv/config'; // so we can use environment variables from our .env file
 
 const sequelize = new Sequelize(
-    process.env.DATABASE,
+    process.env.TEST_DATABASE || process.env.DATABASE,
     process.env.DATABASE_USER,
     process.env.DATABASE_PASSWORD,
     {

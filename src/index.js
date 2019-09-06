@@ -13,6 +13,7 @@ const app = express();
 const eraseDatabaseOnSync = true;
 
 const httpServer = http.createServer(app);
+const isTest = !!process.env.TEST_DATABASE;
 
 
 app.use(cors()); // enable cors
@@ -50,16 +51,16 @@ const server = new ApolloServer({
     },
 });
 
-server.applyMiddleware({ app, path: '/graphiql' });
+server.applyMiddleware({ app, path: '/graphql' });
 server.installSubscriptionHandlers(httpServer);
 
-sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
-    if (eraseDatabaseOnSync) {
+sequelize.sync({ force: isTest }).then(async () => {
+    if (isTest) {
         createUsersWithMessages(new Date());
     }
 
     httpServer.listen({ port: 8000 }, () => {
-        console.log('Apollo Server on: http://localhost:8000/graphiql');
+        console.log('Apollo Server on: http://localhost:8000/graphql');
     });
 });
 

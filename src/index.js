@@ -3,20 +3,35 @@ import cors from 'cors';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 import http from 'http';
+import DataLoader from 'dataloader';
 
 import schema from './schema';
 import resolvers from './resolvers';
 import models, { sequelize } from './models';
+import loaders from './loaders';
 
 
 const app = express();
-const eraseDatabaseOnSync = true;
 
 const httpServer = http.createServer(app);
 const isTest = !!process.env.TEST_DATABASE;
 
 
+
+
 app.use(cors()); // enable cors
+
+const batchUsers = async (keys, models) => {
+    const users = await models.User.findAll({
+        where: {
+            id: keys,
+        },
+    });
+
+    return keys.map(key => users.find(user => user.id === key));
+};
+
+const userLoader = new DataLoader(keys => batchUsers(keys, models));
 
 const server = new ApolloServer({
     typeDefs: schema,
@@ -46,6 +61,9 @@ const server = new ApolloServer({
                 models,
                 me,
                 secret: process.env.SECRET,
+                loaders: {
+                    user: userLoader,
+                },
             };
         }
     },
@@ -109,7 +127,7 @@ const createUsersWithMessages = async date => {
 const getMe = async req => {
     const token = req.headers['x-token'];
 
-    if (token) {
+    if (token && token !== null) {
         try {
             return await jwt.verify(token, process.env.SECRET);
         } catch (e) {

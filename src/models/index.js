@@ -8,6 +8,7 @@ const sequelize = new Sequelize(
     {
         dialect: 'postgres',
         host: process.env.HOST,
+        operatorsAliases: Sequelize.Op
     }
 );
 

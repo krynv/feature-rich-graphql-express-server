@@ -6,15 +6,16 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * Express powered Apollo Server
 * PostgreSQL connectivity via Sequelize
 * Multiple queries and mutations
+* Subscriptions for real-time communication
 * PostgreSQL linked resolvers
+* Schema documentation via GraphiQL
 * Custom validation and error handling
 * User registration and token based authentication
 * User authorisation via resolver middleware
 * Custom scalars
 * Cursor-based pagination
-* Subscriptions for real-time communication
-* Schema documentation via GraphiQL
 * E2E testing
+* Batching and caching
 
 ## Prerequisites
 

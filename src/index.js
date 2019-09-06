@@ -1,15 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
+import jwt from 'jsonwebtoken';
+import http from 'http';
 
 import schema from './schema';
 import resolvers from './resolvers';
 import models, { sequelize } from './models';
 
-import jwt from 'jsonwebtoken';
 
 const app = express();
 const eraseDatabaseOnSync = true;
+
+const httpServer = http.createServer(app);
+
 
 app.use(cors()); // enable cors
 
@@ -20,31 +24,41 @@ const server = new ApolloServer({
         const message = error.message
             .replace('SequelizeValidationError: ', '')  // remove the internal sequelize message
             .replace('Validation error: ', '');         // leave the validation error we specified
+
         return {
             ...error,
             message,
         };
     },
-    context: async ({ req }) => {
+    context: async ({ req, connection }) => {
 
-        const me = await getMe(req);
+        if (connection) {
+            return {
+                models,
+            };
+        }
 
-        return {
-            models,
-            me,
-            secret: process.env.SECRET,
-        };
+        if (req) {
+            const me = await getMe(req);
+
+            return {
+                models,
+                me,
+                secret: process.env.SECRET,
+            };
+        }
     },
 });
 
 server.applyMiddleware({ app, path: '/graphiql' });
+server.installSubscriptionHandlers(httpServer);
 
 sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
     if (eraseDatabaseOnSync) {
         createUsersWithMessages(new Date());
     }
 
-    app.listen({ port: 8000 }, () => {
+    httpServer.listen({ port: 8000 }, () => {
         console.log('Apollo Server on: http://localhost:8000/graphiql');
     });
 });

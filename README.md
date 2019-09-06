@@ -12,6 +12,7 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * User authorisation via resolver middleware
 * Custom scalars
 * Cursor-based pagination
+* Subscriptions for real-time communication
 * Schema documentation via GraphiQL
 
 ## Prerequisites
@@ -190,6 +191,26 @@ mutation {
 ```graphql
 mutation {
     deleteMessage(id: "4")
+}
+```
+
+### Subscriptions
+
+#### Message Created
+
+```graphql
+subscription {
+    messageCreated {
+        message {
+            id
+            text
+            createdAt
+            user {
+                id
+                username
+            }
+        }
+    }
 }
 ```
 

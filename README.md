@@ -80,7 +80,7 @@ package.json
 #### Sign Up 
 ```graphql
 mutation {
-	signUp(username: "TestUser", email: "user@email.com", password: "password123") {
+    signUp(username: "TestUser", email: "user@email.com", password: "password123") {
         token
     }
 }

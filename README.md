@@ -9,6 +9,7 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * PostgreSQL linked resolvers
 * Custom validation and error handling
 * User registration and token based authentication
+* User authorisation via resolver middleware
 * Schema documentation via GraphiQL
 
 ## Prerequisites
@@ -40,9 +41,10 @@ package-lock.json
 package.json
 ```
 
-## Queries and Mutations
+## Available Schemas
 
 > **NOTE**: A `secret` is passed to all resolver functions. Some of these queries and/ or mutations require a `secret` to be defined. It can be added as a `SECRET` parameter in your `.env` file - to be used as an environment variable via the `dotenv` dependency. 
+
 
 ### Users
 
@@ -104,6 +106,17 @@ mutation {
     }
 }
 ```
+
+#### Delete user
+
+> **NOTE**: To use this mutation, the user is required to `signIn` with an account that has the `role` of `ADMIN`.
+
+```graphql
+mutation {
+  deleteUser(id: "2")
+}
+```
+
 
 ### Messages
 

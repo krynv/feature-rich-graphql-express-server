@@ -41,7 +41,7 @@ server.applyMiddleware({ app, path: '/graphiql' });
 
 sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
     if (eraseDatabaseOnSync) {
-        createUsersWithMessages();
+        createUsersWithMessages(new Date());
     }
 
     app.listen({ port: 8000 }, () => {
@@ -49,7 +49,7 @@ sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
     });
 });
 
-const createUsersWithMessages = async () => {
+const createUsersWithMessages = async date => {
 
     await models.User.create(
         {
@@ -60,6 +60,7 @@ const createUsersWithMessages = async () => {
             messages: [
                 {
                     text: 'Created Apple',
+                    createdAt: date.setSeconds(date.getSeconds() + 1),
                 },
             ],
         },
@@ -76,9 +77,11 @@ const createUsersWithMessages = async () => {
             messages: [
                 {
                     text: 'Counted to infinity. Twice',
+                    createdAt: date.setSeconds(date.getSeconds() + 1),
                 },
                 {
                     text: 'Can speak braille',
+                    createdAt: date.setSeconds(date.getSeconds() + 1),
                 },
             ],
         },

@@ -10,6 +10,7 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * Custom validation and error handling
 * User registration and token based authentication
 * User authorisation via resolver middleware
+* Custom scalars
 * Schema documentation via GraphiQL
 
 ## Prerequisites
@@ -58,6 +59,7 @@ package.json
         messages {
             id
             text
+            createdAt
         }
     }
 }
@@ -102,6 +104,7 @@ mutation {
         messages {
             id
             text
+            createdAt
         }
     }
 }
@@ -126,6 +129,7 @@ mutation {
     messages {
         id
         text
+        createdAt
         user {
             id
             username
@@ -141,6 +145,7 @@ mutation {
     message(id: "2") {
         id
         text
+        createdAt
         user {
             id
             username
@@ -159,6 +164,7 @@ mutation {
     createMessage(text: "Cake") {
         id
         text
+        createdAt
     }
 }
 ```

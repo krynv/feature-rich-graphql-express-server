@@ -16,6 +16,7 @@ const port = process.env.PORT || 8000;
 
 const httpServer = http.createServer(app);
 const isTest = !!process.env.TEST_DATABASE;
+const isProduction = !!process.env.DATABASE_URL;
 
 const userLoader = new DataLoader(keys => loaders.user.batchUsers(keys, models)); // have to declare the loader here as it will not allow for caching in the context
 
@@ -121,8 +122,8 @@ app.use(cors()); // enable cors
 server.applyMiddleware({ app, path: '/graphql' });
 server.installSubscriptionHandlers(httpServer);
 
-sequelize.sync({ force: isTest }).then(async () => {
-    if (isTest) {
+sequelize.sync({ force: isTest || isProduction }).then(async () => {
+    if (isTest || isProduction) {
         createUsersWithMessages(new Date());
     }
 

@@ -49,7 +49,7 @@ package-lock.json
 package.json
 ```
 
-> **NOTE**: Declaring the variable `TEST_DATABASE` will purge all of your existing records and fill your database with fresh data on server restart. 
+> **NOTE**: Declaring the variable `TEST_DATABASE` will purge all of your existing records and seed your database with new, fresh data on server restart. 
 
 ## Available Schemas
 

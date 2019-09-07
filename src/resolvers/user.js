@@ -74,8 +74,7 @@ export default {
             return await models.User.destroy({
                 where: { id },
             });
-        },
-        ),
+        }),
     },
 };
 

@@ -16,22 +16,7 @@ const app = express();
 const httpServer = http.createServer(app);
 const isTest = !!process.env.TEST_DATABASE;
 
-
-
-
-app.use(cors()); // enable cors
-
-const batchUsers = async (keys, models) => {
-    const users = await models.User.findAll({
-        where: {
-            id: keys,
-        },
-    });
-
-    return keys.map(key => users.find(user => user.id === key));
-};
-
-const userLoader = new DataLoader(keys => batchUsers(keys, models));
+const userLoader = new DataLoader(keys => loaders.user.batchUsers(keys, models)); // have to declare the loader here as it will not allow for caching in the context
 
 const server = new ApolloServer({
     typeDefs: schema,
@@ -51,6 +36,9 @@ const server = new ApolloServer({
         if (connection) {
             return {
                 models,
+                loaders: {
+                    user: userLoader, // we can also use caching for subscriptions
+                }
             };
         }
 
@@ -67,19 +55,6 @@ const server = new ApolloServer({
             };
         }
     },
-});
-
-server.applyMiddleware({ app, path: '/graphql' });
-server.installSubscriptionHandlers(httpServer);
-
-sequelize.sync({ force: isTest }).then(async () => {
-    if (isTest) {
-        createUsersWithMessages(new Date());
-    }
-
-    httpServer.listen({ port: 8000 }, () => {
-        console.log('Apollo Server on: http://localhost:8000/graphql');
-    });
 });
 
 const createUsersWithMessages = async date => {
@@ -137,3 +112,18 @@ const getMe = async req => {
         }
     }
 };
+
+app.use(cors()); // enable cors
+
+server.applyMiddleware({ app, path: '/graphql' });
+server.installSubscriptionHandlers(httpServer);
+
+sequelize.sync({ force: isTest }).then(async () => {
+    if (isTest) {
+        createUsersWithMessages(new Date());
+    }
+
+    httpServer.listen({ port: 8000 }, () => {
+        console.log('Apollo Server on: http://localhost:8000/graphql');
+    });
+});

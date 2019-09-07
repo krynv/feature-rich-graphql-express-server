@@ -20,6 +20,8 @@ const isTest = !!process.env.TEST_DATABASE;
 const userLoader = new DataLoader(keys => loaders.user.batchUsers(keys, models)); // have to declare the loader here as it will not allow for caching in the context
 
 const server = new ApolloServer({
+    introspection: true,
+    playground: true,
     typeDefs: schema,
     resolvers,
     formatError: error => {

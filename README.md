@@ -226,9 +226,17 @@ Install dependencies:
 
 Start server: 
 
-> **NOTE**: Make sure PostgreSQL is running before you start the application.
+> **NOTE**: Make sure your PostgreSQL server is running before you start the application.
 
     npm start
 
 Access GraphiQL at:
 http://localhost:8000/graphiql
+
+### E2E Tests
+
+> **NOTE**: Make sure your PostgreSQL server is running before you start testing, otherwise the tests will fail.
+
+Tests can be executed using: 
+
+    npm test

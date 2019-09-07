@@ -21,6 +21,7 @@ export default gql`
 
     signIn(login: String!, password: String!): Token!
     deleteUser(id: ID!): Boolean!
+    updateUser(username: String!): User!
   }
 
   type User {
@@ -29,7 +30,6 @@ export default gql`
     email: String!
     role: String
     messages: [Message!]
-
   }
   
 `;

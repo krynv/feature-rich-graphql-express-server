@@ -28,6 +28,7 @@ The `.env` file should look something like this:
 
 ```
 DATABASE=postgres
+TEST_DATABASE=postgres_test
 DATABASE_USER=postgres
 DATABASE_PASSWORD=postgres
 
@@ -47,6 +48,8 @@ README.md
 package-lock.json
 package.json
 ```
+
+> **NOTE**: Declaring the variable `TEST_DATABASE` will purge all of your existing records and fill your database with fresh data on server restart. 
 
 ## Available Schemas
 
@@ -126,6 +129,20 @@ mutation {
 }
 ```
 
+#### Update user
+
+> **NOTE**: To use this mutation, the user is required to `signIn` with a valid account. It will update this user's username
+
+```graphql
+mutation {
+  updateUser(username: "jappleseed") {
+      id
+      username
+      email
+  }
+}
+```
+
 
 ### Messages
 
@@ -198,6 +215,7 @@ mutation {
 }
 ```
 
+
 ### Subscriptions
 
 #### Message Created
@@ -237,6 +255,8 @@ http://localhost:8000/graphiql
 
 > **NOTE**: Make sure your PostgreSQL server is running before you start testing, otherwise the tests will fail.
 
-Tests can be executed using: 
+All tests can be found in the `src/tests` folder.
+
+They can be executed using: 
 
     npm test

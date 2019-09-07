@@ -2,6 +2,8 @@
 
 This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of data.
 
+Live demo: https://graphql-express-server.herokuapp.com/graphql 
+
 ## Features
 * Express powered Apollo Server
 * PostgreSQL connectivity via Sequelize
@@ -16,6 +18,7 @@ This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of d
 * Cursor-based pagination
 * E2E testing
 * Batching and caching
+* Deployed to Heroku
 
 ## Prerequisites
 

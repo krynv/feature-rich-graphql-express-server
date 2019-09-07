@@ -12,6 +12,7 @@ import loaders from './loaders';
 
 
 const app = express();
+const port = process.env.PORT || 8000;
 
 const httpServer = http.createServer(app);
 const isTest = !!process.env.TEST_DATABASE;
@@ -123,7 +124,7 @@ sequelize.sync({ force: isTest }).then(async () => {
         createUsersWithMessages(new Date());
     }
 
-    httpServer.listen({ port: 8000 }, () => {
-        console.log('Apollo Server on: http://localhost:8000/graphql');
+    httpServer.listen({ port }, () => {
+        console.log(`Apollo Server on: http://localhost:${port}/graphql`);
     });
 });

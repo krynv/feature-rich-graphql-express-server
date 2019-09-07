@@ -27,7 +27,6 @@ The `.env` file should look something like this:
 DATABASE=postgres
 DATABASE_USER=postgres
 DATABASE_PASSWORD=postgres
-HOST=localhost
 
 SECRET=myverysecuresecretphrase
 ```

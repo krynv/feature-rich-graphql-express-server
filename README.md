@@ -2,7 +2,7 @@
 
 This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of data.
 
-Live demo: https://graphql-express-server.herokuapp.com/graphql 
+Live demo: http://graphql.flix.industries/graphql
 
 ## Features
 * Express powered Apollo Server

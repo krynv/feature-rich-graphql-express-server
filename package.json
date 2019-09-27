@@ -16,7 +16,7 @@
     "graphql-resolvers": "^0.3.3",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.12.1",
-    "sequelize": "^5.19.0"
+    "sequelize": "^5.19.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",

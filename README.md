@@ -131,7 +131,7 @@ mutation {
 
 #### Update user
 
-> **NOTE**: To use this mutation, the user is required to `signIn` with a valid account. It will update this user's username
+> **NOTE**: To use this mutation, the user is required to `signIn` with a valid account. It will update this user's username.
 
 ```graphql
 mutation {

@@ -21,7 +21,7 @@
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
-    "@babel/node": "^7.7.4",
+    "@babel/node": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
     "axios": "^0.19.1",
     "chai": "^4.2.0",

@@ -26,7 +26,7 @@
     "axios": "^0.19.2",
     "chai": "^4.2.0",
     "mocha": "^7.1.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.8"
   },
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",

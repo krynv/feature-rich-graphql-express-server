@@ -2,8 +2,6 @@
 
 This solution uses [PosgreSQL](https://www.postgresql.org/) for persistence of data.
 
-Live demo: http://graphql.flix.industries/graphql
-
 ## Features
 * Express powered Apollo Server
 * PostgreSQL connectivity via Sequelize
